@@ -79,8 +79,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    	.addFilterBefore(employeeJWTAuthentication(), UsernamePasswordAuthenticationFilter.class)
 	    	.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
 	    
-	    String a = "asd";
-	    a.toUpperCase();
 	}
 	
 }
