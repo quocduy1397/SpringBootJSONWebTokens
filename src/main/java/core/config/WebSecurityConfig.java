@@ -78,6 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    	.antMatchers(HttpMethod.DELETE, urlAPI).access("hasRole('ROLE_USER')").and()
 	    	.addFilterBefore(employeeJWTAuthentication(), UsernamePasswordAuthenticationFilter.class)
 	    	.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
+	    
+	    String a = "asd";
+	    a.toUpperCase();
 	}
 	
 }
