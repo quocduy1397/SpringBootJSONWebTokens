@@ -3,6 +3,7 @@ package core.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -81,7 +82,10 @@ public class ContactController {
 			e.printStackTrace();
 		}
 		String position = fields.get("position") == null ? "" : fields.get("position").toString();
-		List<Contact> list = service.findByPositionAndReturnSelectedFields("position", position);
+		
+		Document document = new Document();
+		document.append("position", position);
+		List<Contact> list = service.findByPositionAndReturnSelectedFields(document);
 		Page<Contact> pageResults = new PageImpl<Contact>(list, PageRequest.of(page, size), list.size());
 		return pageResults.toList();
 	}
