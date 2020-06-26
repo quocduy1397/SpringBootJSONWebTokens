@@ -13,6 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.github.kaiso.relmongo.annotation.FetchType;
+import io.github.kaiso.relmongo.annotation.JoinProperty;
+import io.github.kaiso.relmongo.annotation.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,6 +59,10 @@ public class Contact {
     @DBRef
     private Department departmentDBRef;
     
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinProperty(name="departmentDBRefOther")
+    private Department departmentDBRefOther;
+    
     @Email(message = "Invalid email")
     private String email;
     
@@ -66,4 +73,5 @@ public class Contact {
 	{
 		return _id == null ? null : _id.toHexString();
 	}
+	
 }
