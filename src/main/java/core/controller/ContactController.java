@@ -74,7 +74,7 @@ public class ContactController {
 	}
 	
 	@GetMapping(value = "/position/")
-	public List<Contact> findByGroup(@RequestBody HashMap<String, Object> fields)
+	public List<Contact> findByPosition(@RequestBody HashMap<String, Object> fields)
 	{
 		int page = 0;
 		int size = 1;
