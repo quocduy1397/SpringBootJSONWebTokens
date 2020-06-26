@@ -1,5 +1,6 @@
 package core.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,9 +84,16 @@ public class ContactController {
 		}
 		String position = fields.get("position") == null ? "" : fields.get("position").toString();
 		
-		Document document = new Document();
-		document.append("position", position);
-		List<Contact> list = service.findByPositionAndReturnSelectedFields(document);
+		Document conditions = new Document();
+		List<Document> listConditions = new ArrayList<>();
+		listConditions.add(new Document("position", position));
+		listConditions.add(new Document("contactID", "CT00672"));
+		conditions.append("$and", listConditions);
+		
+		Document selectedFields = new Document();
+		selectedFields.append("position", true).append("contactID", true)
+		.append("department", true).append("departmentDBRef", true);
+		List<Contact> list = service.findByConditionAndReturnSelectedFields(conditions, selectedFields);
 		Page<Contact> pageResults = new PageImpl<Contact>(list, PageRequest.of(page, size), list.size());
 		return pageResults.toList();
 	}

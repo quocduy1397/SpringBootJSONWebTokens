@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -51,6 +52,9 @@ public class Contact {
     private String group;
     private String department;
     private String knowledge;
+    
+    @DBRef
+    private Department departmentDBRef;
     
     @Email(message = "Invalid email")
     private String email;

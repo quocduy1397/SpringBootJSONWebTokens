@@ -14,6 +14,9 @@ import core.model.Contact;
 public interface ContactRepository extends MongoRepository<Contact, ObjectId> {
 	List<Contact> findByPosition(String position);
 	
-	@Query(value = "?0", fields = "{ 'contactID' : 1, 'position' : 1 }")
-	List<Contact> findByPositionAndReturnSelectedFields(Document document);
+	@Query(value = "{ 'contactID' : ?0 }")
+	List<Contact> findByContactID(String contactID);
+	
+	@Query(value = "?0", fields = "?1")
+	List<Contact> findByConditionAndReturnSelectedFields(Document query, Document project);
 }
