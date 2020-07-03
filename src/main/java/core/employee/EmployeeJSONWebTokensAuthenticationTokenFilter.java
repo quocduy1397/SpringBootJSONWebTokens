@@ -70,24 +70,20 @@ public class EmployeeJSONWebTokensAuthenticationTokenFilter extends UsernamePass
 	
 	private Boolean checkAccess(Employee employee, String httpMethod, String url)
 	{
-		if (employee == null) { return false; }
-	    else
-	    {
-	    	List<EmployeeRole> roles = employeeRoleService.getEmployeeRole(employee.getEmployeeID());
-	    	if (roles.isEmpty()) { return false; }
-	    	else
-	    	{
-	    		String[] s = url.split("/", 4);
-	    		String api = "/" + s[3];
-	    		for (EmployeeRole role : roles)
-	    		{
-	    			if (role.getHttpMethod().equals(httpMethod) && role.getUrlAPI().equals(api))
-	    			{
-	    				return true;
-	    			}
-	    		}
-	    	}
-	    }
+		List<EmployeeRole> roles = employeeRoleService.getEmployeeRole(employee.getEmployeeID());
+    	if (roles.isEmpty()) { return false; }
+    	else
+    	{
+    		String[] s = url.split("/", 4);
+    		String api = "/" + s[3];
+    		for (EmployeeRole role : roles)
+    		{
+    			if (role.getHttpMethod().equals(httpMethod) && role.getUrlAPI().equals(api))
+    			{
+    				return true;
+    			}
+    		}
+    	}
 		return false;
 	}
 }

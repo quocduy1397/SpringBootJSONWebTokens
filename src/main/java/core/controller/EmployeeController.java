@@ -48,7 +48,7 @@ public class EmployeeController {
 	    {
 	    	return new ResponseEntity<>("Employee already existed!", HttpStatus.BAD_REQUEST);
 	    }
-	  }
+	}
 	
 	@DeleteMapping(value = "/")
 	public ResponseEntity<Object> deleteEmployee(@RequestBody String employeeID)
